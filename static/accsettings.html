@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Account</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+    integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+</head>
+
+<body style="background-color: #eeee;">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand col-2" href="index.html">
+      <img src="rent_logo.png" height="50" alt="Rental System">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" href="account.html">Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" href="inventory.html">Inventory</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" href="requests.html">Rental Requests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" href="renteditems.html">Rented Items</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold" href="index.html">Rental</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container col-8 mt-2">
+    <div class="row mb-2">
+      <div class="col-sm-10 col-12 mt-2">
+        <h2>Account <b>Settings</b></h2>
+      </div>
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card shadow" style="border-radius: 15px;">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <i class="fas fa-user fa-7x fa-fw"></i>
+                <div class="mt-3">
+                  <h4>Teszt Elek</h4>
+                  <hr class="my-3">
+                  <p class="text-secondary mb-1">Door Number</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card shadow" style="border-radius: 15px;">
+            <div class="card-body">
+              <form>
+                <div class="row mb-3">
+                  <div class="col-sm-3 d-flex align-items-center">
+                    <label class=" h6 mb-0" for="name">Full Name</label>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <input name="name" id="name" type="text" class="form-control" value="Teszt Elek">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-3 d-flex align-items-center">
+                    <label class="h6 mb-0" for="email">Email</label>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <input name="email" id="email" type="text" class="form-control" value="teszt.elek@ecsetelek.hu">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-3 d-flex align-items-center">
+                    <label class=" h6 mb-0" for="doornum">Door Number</label>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <input name="doornum" id="doornum" type="text" class="form-control" value="1/A">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-9 text-secondary">
+                    <input type="submit" class="btn btn-primary float-right ml-2" value="Save">
+                    <a type="button" href="account.html" class="btn btn-secondary float-right">Cancel</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+    integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "szerveroldalihf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nagyerik99/SzerveroldaliHF.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nagyerik99/SzerveroldaliHF/issues"
+  },
+  "homepage": "https://github.com/nagyerik99/SzerveroldaliHF#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
