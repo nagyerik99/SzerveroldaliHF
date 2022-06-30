@@ -1,11 +1,57 @@
 default routes and mw-s:
 
 oldalak:
-index
-kiadott eszkozok
-uj kiadott eszkoz
-kiadott eszkoz szerkesztese
-kiadott eszkoz torlese
+--kiadott eszkozok
+--uj kiadott eszkoz
+--kiadott eszkoz szerkesztese
+--kiadott eszkoz torlese
 bejelentkezes
 elfelejtett jelszo                  --console.logos cuccos
 regisztracio
+--felhasznaloi adatok megjelenitese
+--felhasznaloi adatok szerkesztese
+--felhasznalo torlese --TODO: egy gomb implementalasa accsettings -html-en warniong, majd torles es redirect a login kepernyore.
+--osszes kolcsonozheto cucc lekerese --> index.html //minden eszkoz ami nem a tied es ami nincs kiadva kolcsonbe
+--egy kolcsonozheto cucc lekerese és kolcsonzes leadasa
+kolcsonzesek megtekintese
+kolcsonzesek módosítása
+kolcsonzes engedélyezése
+kocsnonzes torlese
+
+
+Routing:
+
+GET / and /rental/items --> index.html:
+    ha nincs loginolva a felhasznalo redirect a login oldalra.
+
+GET,POST /rental/items/:rentalid --> rentdetails.html:
+    kolcsonzes redirect a /rental oldalra.
+    a kolcsonzes az post muvelet egyebkent gettel kapjuik meg a rentaldetailst.
+
+GET /user/:userid --> account.html:
+    nincs összes user listazasa
+
+POST user/edit/:userid -->accsettings.html:
+    POST-al modosithatjuk az adatokat amik a userhez tartoznak, de elotte gettel megkapjuk az eddig ervenyes adatokat
+
+
+GET /user/inventory --> inventory.html:
+    Összes a tulajdonso altal kiadott kolcsonozheto elem megjelenitese 
+    torles --> localsban torles majd redirect ide az inventory-ra //reload
+    edit gomb --> redirect /user/inventory/edit/:inventoryid
+
+GET /user/inventory/edit/:inventoryid  --newitem.html
+POST /user/inventory/edit/:inventoryid
+GET /user/inventory/del/:inventoryid
+
+GET /user/requests --> requests.html
+
+POST /rental/requests /
+
+
+//Ez igy kurva sok munka lesz ---> nem is 2 entitas van hanem vannak meg a kolcsonzesek, a requestek is.
+
+
+
+
+
