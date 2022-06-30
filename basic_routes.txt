@@ -1,0 +1,11 @@
+default routes and mw-s:
+
+oldalak:
+index
+kiadott eszkozok
+uj kiadott eszkoz
+kiadott eszkoz szerkesztese
+kiadott eszkoz torlese
+bejelentkezes
+elfelejtett jelszo                  --console.logos cuccos
+regisztracio
