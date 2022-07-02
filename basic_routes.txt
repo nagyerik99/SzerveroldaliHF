@@ -5,53 +5,213 @@ oldalak:
 --uj kiadott eszkoz
 --kiadott eszkoz szerkesztese
 --kiadott eszkoz torlese
-bejelentkezes
-elfelejtett jelszo                  --console.logos cuccos
-regisztracio
+--bejelentkezes
+--elfelejtett jelszo                  --console.logos cuccos
+--regisztracio
 --felhasznaloi adatok megjelenitese
 --felhasznaloi adatok szerkesztese
 --felhasznalo torlese --TODO: egy gomb implementalasa accsettings -html-en warniong, majd torles es redirect a login kepernyore.
 --osszes kolcsonozheto cucc lekerese --> index.html //minden eszkoz ami nem a tied es ami nincs kiadva kolcsonbe
 --egy kolcsonozheto cucc lekerese és kolcsonzes leadasa
-kolcsonzesek megtekintese
-kolcsonzesek módosítása
-kolcsonzes engedélyezése
-kocsnonzes torlese
+--kolcsonzesek megtekintese
+--kolcsonzes engedélyezése
+--kocsnonzes torlese
 
 
 Routing:
+-----------------------------------------auth-mappa-----------------------------------------------
 
-GET / and /rental/items --> index.html:
-    ha nincs loginolva a felhasznalo redirect a login oldalra.
+checkPasswordMW
+checkEmailMW
+sendPasswordMW
+autMW
+renderMW
 
-GET,POST /rental/items/:rentalid --> rentdetails.html:
-    kolcsonzes redirect a /rental oldalra.
-    a kolcsonzes az post muvelet egyebkent gettel kapjuik meg a rentaldetailst.
+-----------------------------------------user-mappa-------------------------------------------------
+getUserMW
+editUserMW
+saveUserMW
+delUserMW
 
-GET /user/:userid --> account.html:
-    nincs összes user listazasa
+-----------------------------------------inventory-mappa--------------------------------------------
+getInventoriesMW
+getInventoryMW
+saveInventoryMW
+delInventoryMW
 
-POST user/edit/:userid -->accsettings.html:
-    POST-al modosithatjuk az adatokat amik a userhez tartoznak, de elotte gettel megkapjuk az eddig ervenyes adatokat
+-----------------------------------------request-mappa---------------------------------------------
+getRequestsMW
+getRequestMW
+saveRequestMW
+delRequestMW
+
+-----------------------------------------rented-mappa-----------------------------------------------
+getRentedMW
+
+-----------------------------------------rental-mappa-----------------------------------------------
+getRentalsMW
+getRentalMW
+saveRentalMW
+checkRentalMW
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+bejelentkezes, regisztracio elfelejtett jelszo:
+---------------------------------------------------------------------------------------------------
+
+    GET /login                                              --> login.html
+    POST /login                                             -->bejelentkezesi kiserlet
+    checkPasswordMW                                         -->Sikeres bejelentkezes --> redirect / vagy / rental oldalra
+                                                            -->Sikertelen /login és hibauzenet renderelese
 
 
-GET /user/inventory --> inventory.html:
-    Összes a tulajdonso altal kiadott kolcsonozheto elem megjelenitese 
-    torles --> localsban torles majd redirect ide az inventory-ra //reload
-    edit gomb --> redirect /user/inventory/edit/:inventoryid
-
-GET /user/inventory/edit/:inventoryid  --newitem.html
-POST /user/inventory/edit/:inventoryid
-GET /user/inventory/del/:inventoryid
-
-GET /user/requests --> requests.html
-
-POST /rental/requests /
+    GET /login/newpass --> newpass.html
+    POST /login/newpass                                     --> uj jleszo igenylese
+                                                            console.logra uj password
+                                                            ha nincs megadott jelszoval felhasznalo akkor hiba megjelenitese //reload
+    checkEmailMW
+    sendPasswordMW
+    renderMW(login.html)
 
 
-//Ez igy kurva sok munka lesz ---> nem is 2 entitas van hanem vannak meg a kolcsonzesek, a requestek is.
+    GET /registration --> registration.html
+    POST /registration --> regisztracios kiserlet 
+    sikeres regisztracio eseten --> redirect /login oldalra
+    sikertelen regisztracio eseten --> hiba kirenderelese es reload 
+
+    checkEmailMW                       --ha már van regisztralva felhasznalo akkor error.
+    saveUserMW                         --felhasznalo letrehozasa es redirect
+    renderMW(registration.html)
+
+---------------------------------------------------------------------------------------------------
+Felhasznalo szerkesztese megtekintese, trolese:
+---------------------------------------------------------------------------------------------------
+    GET /user/:userid --> account.html:
+        nincs összes user listazasa
+        getUserMW
+        autMW
+        renderMW(account.html)
+
+    POST /user/:userid/edit -->accsettings.html:
+        POST-al modosithatjuk az adatokat amik a userhez tartoznak, de elotte gettel megkapjuk az eddig ervenyes adatokat
+        autMW
+        getUserMW
+        editUserMW
+        renderMW(accsettings.html)
+
+    GET /user/:userid/del
+        A felhasznalo torlese az osszes hozzatartozo berlessel es elemmel egyutt, illetve az össze olyan kolcsonzesi
+        kerelem torlese amely az ő dolgaira vonatkozik.
+        Torles utan redirect a /login oldalra.
+        autMW
+        getUserMW
+        getInventoryMW
+        checkRentalMW           -- ha van folyamatban levo kolcsonzes, akkor next es error msg +render
+        delUserMW               --csak akkor lehet torolni a felhasznalot, ha nics folyamatban semmilyen kolcsonzes tole. :)
+
+---------------------------------------------------------------------------------------------------
+
+Elemek megtekintese, szerkesztese, torlese:
+---------------------------------------------------------------------------------------------------
+
+    GET user/:userid/inventory --> inventory.html:
+        Összes a tulajdonso altal kiadott kolcsonozheto elem megjelenitese 
+        torles --> localsban torles majd redirect ide az inventory-ra //reload
+        edit gomb --> redirect user/:userid/inventory/edit/:inventoryid ~ newitem.html
+        új hozzáadás gomb --> redirect user/:userid/inventory/new
+
+        autMW
+        getUserMW
+        getInventoriesMW
+        renderMW(inventory.html)
+
+    GET,POST user/:userid/inventory/new --newitem.html
+        autMW
+        getUserMW
+        saveInventoryMW
+        renderMW(newitem.html)
+
+    GET,POST user/:userid/inventory/edit/:inventoryid  --newitem.html
+        autMW
+        getUserMW
+        getInventoryMW
+        saveInventoryMW
+        renderMW(newitem.html)
+
+    GET user/:userid/inventory/del/:inventoryid --> elem torlese majd redirect a /user/:userid/inventory oldalra
+        autMW
+        getUserMW
+        getInventoryMW
+        delInventoryMW
+    ---------------------------------------------------------------------------------------------------
+
+Igenylesek megtekintese, szerkesztese, torlese:
+---------------------------------------------------------------------------------------------------
+
+    GET,POST user/:userid/request --> requests.html:
+        kolcsonzesi igenyek kezelese
+        torles --> localsban torles majd redirect ide a user/:userid/request-ra //reload
+        accept/decline gombok --> POST művelet, request athelyezese a rental tablaba ha ugy van, majd redirect/reload
+
+        autMW
+        getUserMW
+        getRequestsMW
+        renderMW(requests.html)
+
+    POST user/:userid/request/edit/:requestid
+        autMW
+        getUserMW
+        getRequestMW
+        saveRequestMW
+        renderMW(requests.html)
 
 
+    GET user/:userid/request/del/:requestid
+        autMW
+        getUserMW
+        getRequestMW
+        delRequestMW
+
+---------------------------------------------------------------------------------------------------
+
+Berlesek megtekintese:
+---------------------------------------------------------------------------------------------------
+
+    GET user/:userid/rented --> renteditems.html
+    kolcsonzott elemek megtekintese
+    renderelesnel ha mar lejart a kolcsonzes akkor szin masmilyen.
+    nincs szerkesztes/torles muvelet
+
+        autMW
+        getUserMW
+        getRentedMW
+        renderMW(renteditems.html)
+
+---------------------------------------------------------------------------------------------------
+
+Berles megtekintese, uj felvetele:
+---------------------------------------------------------------------------------------------------
+    GET / --> index.html:
+        ha nincs loginolva a felhasznalo redirect a /login oldalra,
+        egyebkent pedig a rental adatok megjelenitese/renderelese
+
+        autMW
+        getUserMW
+        getRentalsMW             --összes inventory, ami nem a bejelentkezett user-e
+        renderMW(index.html)
+
+
+    GET,POST /rental/:rentalid --> rentdetails.html:
+        kolcsonzes redirect a /rental oldalra.
+
+        autMW
+        getRentalMW
+        getUserMW
+        saveRentalMW
+        renderMW(rentdetails.html)
+
+---------------------------------------------------------------------------------------------------
 
 
 
