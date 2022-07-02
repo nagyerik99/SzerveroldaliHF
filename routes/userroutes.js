@@ -71,6 +71,7 @@ module.exports = function (app) {
    * Registration request
    */
   app.use('/registration',
+    inverseAuthMW(objectRepository),
     checkEmailMW(objectRepository),
     saveUserMW(objectRepository),
     renderMW(objectRepository, 'registration')
