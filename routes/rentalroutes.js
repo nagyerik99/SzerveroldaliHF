@@ -63,13 +63,11 @@ module.exports = function (app) {
    );
 
     /**
-   * Show rentable items for the user, all the items that currently avaiable and not the user's.
+   * Show landingpage for the user if not registered or loged in
    */
     app.get('/',
      authMW(objectRepository),
-     getUserMW(objectRepository),
-     getRentalsMW(objectRepository),
-     renderMW(objectRepository,'rentable_list'), 
+     renderMW(objectRepository,'home'), 
     );
 
     /**
