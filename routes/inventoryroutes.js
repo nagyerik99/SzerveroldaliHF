@@ -17,7 +17,7 @@ module.exports = function (app) {
     authMW(objectRepository),
     getUserMW(objectRepository),
     getInventoriesMW(objectRepository),
-    renderMW(objectRepository, 'inventory_list')
+    renderMW(objectRepository, 'inventory')
   );
 
   /**
@@ -27,7 +27,7 @@ module.exports = function (app) {
     authMW(objectRepository),
     getUserMW(objectRepository),
     saveInventoryMW(objectRepository),
-    renderMW(objectRepository, 'inventory_new')
+    renderMW(objectRepository, 'newitem')
   );
 
     /**
@@ -38,7 +38,7 @@ module.exports = function (app) {
      getUserMW(objectRepository),
      getInventoryMW(objectRepository),
      saveInventoryMW(objectRepository),
-     renderMW(objectRepository, 'inventory_edit')
+     renderMW(objectRepository, 'newitem')
  
    );
 

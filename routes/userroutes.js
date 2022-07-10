@@ -22,7 +22,7 @@ module.exports = function (app) {
   app.get('/user/:userid',
     authMW(objectRepository),
     getUserMW(objectRepository),
-    renderMW(objectRepository, 'user')
+    renderMW(objectRepository, 'account')
   );
 
   /**
@@ -32,7 +32,7 @@ module.exports = function (app) {
     authMW(objectRepository),
     getUserMW(objectRepository),
     editUserMW(objectRepository),
-    renderMW(objectRepository, 'user_edit')
+    renderMW(objectRepository, 'accsettings')
   );
 
   /**

@@ -23,7 +23,7 @@ module.exports = function (app) {
     authMW(objectRepository),
     getUserMW(objectRepository),
     getRequestsMW(objectRepository),
-    renderMW(objectRepository, 'request_list')
+    renderMW(objectRepository, 'requests')
   );
 
   /**
@@ -59,7 +59,7 @@ module.exports = function (app) {
      authMW(objectRepository),
      getUserMW(objectRepository),
      getRentedMW(objectRepository),
-     renderMW(objectRepository,'rented_list')
+     renderMW(objectRepository,'renteditems')
    );
 
     /**
@@ -67,7 +67,7 @@ module.exports = function (app) {
    */
     app.get('/',
      authMW(objectRepository),
-     renderMW(objectRepository,'home'), 
+     renderMW(objectRepository,'index') 
     );
 
     /**
@@ -77,7 +77,7 @@ module.exports = function (app) {
       authMW(objectRepository),
       getUserMW(objectRepository),
       getRentalsMW(objectRepository),
-      renderMW(objectRepository,'rentable_list')
+      renderMW(objectRepository,'rental')
     );
 
 
@@ -89,6 +89,6 @@ module.exports = function (app) {
      getUserMW(objectRepository),
      getRentalMW(objectRepository),
      saveRentalMW(objectRepository),
-     renderMW(objectRepository,'rentable_item')
+     renderMW(objectRepository,'rentdetails')
     );
 };
