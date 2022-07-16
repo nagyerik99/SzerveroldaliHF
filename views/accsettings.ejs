@@ -15,9 +15,9 @@
               <div class="d-flex flex-column align-items-center text-center">
                 <i class="fas fa-user fa-7x fa-fw"></i>
                 <div class="mt-3">
-                  <h4>Teszt Elek</h4>
+                  <h4><%= user.name %> </h4>
                   <hr class="my-3">
-                  <p class="text-secondary mb-1">Door Number</p>
+                  <p class="text-secondary mb-1"><%= user.door_number %></p>
                 </div>
               </div>
             </div>
@@ -26,13 +26,14 @@
         <div class="col-lg-8">
           <div class="card shadow" style="border-radius: 15px;">
             <div class="card-body">
-              <form>
+              <form method="post">
                 <div class="row mb-3">
+                  <input type="hidden" value="<%= user._id%>">
                   <div class="col-sm-3 d-flex align-items-center">
                     <label class=" h6 mb-0" for="name">Full Name</label>
                   </div>
                   <div class="col-sm-9 text-secondary">
-                    <input name="name" id="name" type="text" class="form-control" value="Teszt Elek">
+                    <input name="name" id="name" type="text" class="form-control" value="<%= user.name %>">
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -40,7 +41,7 @@
                     <label class="h6 mb-0" for="email">Email</label>
                   </div>
                   <div class="col-sm-9 text-secondary">
-                    <input name="email" id="email" type="text" class="form-control" value="teszt.elek@ecsetelek.hu">
+                    <input name="email" id="email" type="text" class="form-control" value="<%= user.email%>">
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -48,16 +49,16 @@
                     <label class=" h6 mb-0" for="doornum">Door Number</label>
                   </div>
                   <div class="col-sm-9 text-secondary">
-                    <input name="doornum" id="doornum" type="text" class="form-control" value="1/A">
+                    <input name="doornum" id="doornum" type="text" class="form-control" value="<%= user.door_number %>">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-3">
-                    <a type="button" href="login.html" id="delete_button" class="btn btn-danger float-left">Delete</a>
+                    <a type="button" href="/account/delete" id="delete_button" class="btn btn-danger float-left">Delete</a>
                   </div>
                   <div class="col-sm-9 text-secondary">
                     <input type="submit" class="btn btn-primary float-right ml-2" value="Save">
-                    <a type="button" href="account.html" class="btn btn-secondary float-right">Cancel</a>
+                    <a type="button" href="/account" class="btn btn-secondary float-right">Cancel</a>
                   </div>
                 </div>
               </form>

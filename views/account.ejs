@@ -13,9 +13,9 @@
                       <div class="d-flex flex-column align-items-center text-center">
                         <i class="fas fa-user fa-7x fa-fw"></i>
                         <div class="mt-3">
-                          <h4>Teszt Elek</h4>
+                          <h4><%= user.name %> </h4>
                           <hr class="my-3">
-                          <p class="text-secondary mb-1">Door Number</p>
+                          <p class="text-secondary mb-1"><%= user.door_number %> </p>
                         </div>
                       </div>
                     </div>
@@ -29,7 +29,7 @@
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          Teszt Elek
+                          <%= user.name %>
                         </div>
                       </div>
                       <hr>
@@ -38,7 +38,7 @@
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          teszt.elek@ecsetelek.hu
+                          <%= user.email %>
                         </div>
                       </div>
                       <hr>
@@ -47,13 +47,13 @@
                           <h6 class="text-secondary mb-1">Door Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          Here comes the door number/address
+                          <%= user.door_number %>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-12">
-                          <a class="btn btn-info float-right pl-4 pr-4" href="accsettings.html">Edit</a>
+                          <a class="btn btn-info float-right pl-4 pr-4" href="account/edit">Edit</a>
                         </div>
                       </div>
                     </div>

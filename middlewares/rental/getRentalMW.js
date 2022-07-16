@@ -7,6 +7,12 @@
 module.exports = function (objectrepository) {
       
     return function (req, res, next) {
+      res.locals.rental = {
+        _id: 1,
+        name: 'ItemName1',
+        type: 'gadgets'
+      };
+      
       return next();
     };
   

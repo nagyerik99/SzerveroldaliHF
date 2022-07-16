@@ -1,51 +1,64 @@
-<%- include('header') %> 
-<%- include('navbar') %> 
-  <div class="container col-8 mt-2">
-    <div class="row mb-2">
-      <div class="col-sm-10 col-12 mt-2">
-        <h2>New <b>Rentable</b></h2>
+<%- include('header') %>
+  <%- include('navbar') %>
+    <div class="container col-8 mt-2">
+      <div class="row mb-2">
+        <div class="col-sm-10 col-12 mt-2">
+          <h2>
+            <% if (typeof inventory==='undefined' ) {%>
+               Add 
+            <%}else{%>
+               Edit 
+               <%}%>
+              <b>Rentable</b>
+          </h2>
+        </div>
       </div>
-    </div>
-    <div>
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="card shadow" style="border-radius: 15px;">
-            <div class="card-body">
-              <form method="post">
-                <div class="row mb-3">
-                  <div class="d-flex align-items-center col-sm-3">
-                    <label class=" h6 mb-0" for="name">Item Name</label>
+      <div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card shadow" style="border-radius: 15px;">
+              <div class="card-body">
+                <form method="post">
+                  <input type="hidden" name="id" id="id" value="<%= inventory._id %>">
+                  <div class="row mb-3">
+                    <div class="d-flex align-items-center col-sm-3">
+                      <label class=" h6 mb-0" for="name">Item Name</label>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input name="name" id="name" type="text" class="form-control" placeholder="Items name"
+                      value="<%= (typeof inventory==='undefined' )? "" : inventory.name %> "
+                      >
+                    </div>
                   </div>
-                  <div class="col-sm-9 text-secondary">
-                    <input name="name" id="name" type="text" class="form-control" value="Ladder">
+                  <div class="row mb-3">
+                    <div class="d-flex align-items-center col-sm-3">
+                      <label class="h6 mb-0" for="item_type">Item Type</label>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <!-- <input name="item_type" id="item_type" type="" class="form-control"> -->
+                      <select name="type" id="type" class="custom-select form-control"
+                        id="type_select">
+                        <% for(key in types){%> 
+                          <option value="<%= key %>" <%if (typeof inventory!== 'undefined' ){ if (types!=='undefined' && inventory.type === key){ %>
+                            selected <% }} %>
+                            >
+                            <%= types[key] %> 
+                          </option>
+                          <% } %> 
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="d-flex align-items-center col-sm-3">
-                    <label class="h6 mb-0" for="item_type">Item Type</label>
+                  <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="submit" class="btn btn-primary float-right ml-2" value="Save">
+                    </div>
                   </div>
-                  <div class="col-sm-9 text-secondary">
-                    <!-- <input name="item_type" id="item_type" type="" class="form-control"> -->
-                    <select name="item_type" id="item_type" class="custom-select form-control" id="inputGroupSelect01">
-                      <option value="diy">DIY</option>
-                      <option value="kithchen_accessories">Kitchen Accessories</option>
-                      <option value="transport">Transport</option>
-                      <option value="gadgets">Gadgets</option>
-                      <option value="other" selected>Other</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-3"></div>
-                  <div class="col-sm-9 text-secondary">
-                    <input type="submit" class="btn btn-primary float-right ml-2" value="Save">
-                  </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <%- include('footer') %> 
+    <%- include('footer') %>

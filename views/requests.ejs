@@ -16,126 +16,38 @@
               </tr>
             </thead>
             <tbody>
+              <% requests.forEach(function(request){%>
                 <tr>
                     <td>
                       <div class="d-flex align-items-center">
                          <i class="fas fa-user fa-2x fa-fw"></i>
                         <div class="ml-3">
-                          <p class="fw-bold mb-0 font-weight-bold">Person Name</p>
-                          <p class="fw-bold mb-1">Door Number</p>
+                          <p class="fw-bold mb-0 font-weight-bold"><%= request.renter.name %> </p>
+                          <p class="fw-bold mb-1"><%= request.renter.door_number %> </p>
                         </div>
                       </div>
                     </td>
                     <td class="align-middle">
-                      <p class="fw-normal mb-1 font-italic">ItemName</p>
+                      <p class="fw-normal mb-1 font-italic"><%= request.item.name %> </p>
                     </td>
                     <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 08:00</p>
+                        <p class="fw-normal mb-1 font-weight-bold"><%= request.date_from %> </p>
                     </td>
                     <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 12:00</p>
-                    </td>
-                    <td class="align-middle">
-                        <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-link btn-sm btn-rounded text-warning">
-                               <i class="fas fa-check fa-lg fa-fw"></i>
-                            </button>
-                            <button type="button" class="btn btn-link btn-sm btn-rounded text-danger">
-                              <i class="fas fa-trash fa-lg fa-fw"></i>
-                            </button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                         <i class="fas fa-user fa-2x fa-fw"></i>
-                        <div class="ml-3">
-                          <p class="fw-bold mb-0 font-weight-bold">Person Name</p>
-                          <p class="fw-bold mb-1">Door Number</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="align-middle">
-                      <p class="fw-normal mb-1 font-italic">ItemName</p>
-                    </td>
-                    <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 08:00</p>
-                    </td>
-                    <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 12:00</p>
+                        <p class="fw-normal mb-1 font-weight-bold"><%= request.date_to %> </p>
                     </td>
                     <td class="align-middle">
                         <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-link btn-sm btn-rounded text-warning">
+                            <a  href="/request/edit/<%= request._id%> " class="btn btn-link btn-sm btn-rounded text-warning">
                                <i class="fas fa-check fa-lg fa-fw"></i>
-                            </button>
-                            <button type="button" class="btn btn-link btn-sm btn-rounded text-danger">
+                            </a>
+                            <a href="/request/del/<%= request._id %> " class="btn btn-link btn-sm btn-rounded text-danger">
                               <i class="fas fa-trash fa-lg fa-fw"></i>
-                            </button>
+                            </a>
                         </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                         <i class="fas fa-user fa-2x fa-fw"></i>
-                        <div class="ml-3">
-                          <p class="fw-bold mb-0 font-weight-bold">Person Name</p>
-                          <p class="fw-bold mb-1">Door Number</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="align-middle">
-                      <p class="fw-normal mb-1 font-italic">ItemName</p>
-                    </td>
-                    <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 08:00</p>
-                    </td>
-                    <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 12:00</p>
-                    </td>
-                    <td class="align-middle">
-                        <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-link btn-sm btn-rounded text-warning">
-                               <i class="fas fa-check fa-lg fa-fw"></i>
-                            </button>
-                            <button type="button" class="btn btn-link btn-sm btn-rounded text-danger">
-                              <i class="fas fa-trash fa-lg fa-fw"></i>
-                            </button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                         <i class="fas fa-user fa-2x fa-fw"></i>
-                        <div class="ml-3">
-                          <p class="fw-bold mb-0 font-weight-bold">Person Name</p>
-                          <p class="fw-bold mb-1">Door Number</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="align-middle">
-                      <p class="fw-normal mb-1 font-italic">ItemName</p>
-                    </td>
-                    <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 08:00</p>
-                    </td>
-                    <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 12:00</p>
-                    </td>
-                    <td class="align-middle">
-                        <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-link btn-sm btn-rounded text-warning">
-                               <i class="fas fa-check fa-lg fa-fw"></i>
-                            </button>
-                            <button type="button" class="btn btn-link btn-sm btn-rounded text-danger">
-                              <i class="fas fa-trash fa-lg fa-fw"></i>
-                            </button>
-                        </div>
-                    </td>
-                  </tr>
+              <% }) %> 
             </tbody>
           </table>
     </div>

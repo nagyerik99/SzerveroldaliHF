@@ -17,98 +17,31 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                     <i class="fas fa-screwdriver fa-2x fa-fw"></i>
-                    <div class="ml-3">
-                      <p class="fw-bold mb-1">ItemName</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="fw-normal mb-1">ItemType</p>
-                </td>
-                <td>
+              <% inventories.forEach(function(item){%>
+                <tr>
+                  <td>
                     <div class="d-flex align-items-center">
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-warning">
-                            <i class="fas fa-edit fa-lg fa-fw"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger">
-                          <i class="fas fa-trash fa-lg fa-fw"></i>
-                        </button>
+                       <i class="fas fa-screwdriver fa-2x fa-fw"></i>
+                      <div class="ml-3">
+                        <p class="fw-bold mb-1"><%= item.name %> </p>
+                      </div>
                     </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                     <i class="fas fa-screwdriver fa-2x fa-fw"></i>
-                    <div class="ml-3">
-                      <p class="fw-bold mb-1">ItemName</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="fw-normal mb-1">ItemType</p>
-                </td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-warning">
-                            <i class="fas fa-edit fa-lg fa-fw"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger">
-                          <i class="fas fa-trash fa-lg fa-fw"></i>
-                        </button>
-                    </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                     <i class="fas fa-screwdriver fa-2x fa-fw"></i>
-                    <div class="ml-3">
-                      <p class="fw-bold mb-1">ItemName</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="fw-normal mb-1">ItemType</p>
-                </td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-warning">
-                            <i class="fas fa-edit fa-lg fa-fw"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger">
-                          <i class="fas fa-trash fa-lg fa-fw"></i>
-                        </button>
-                    </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                     <i class="fas fa-screwdriver fa-2x fa-fw"></i>
-                    <div class="ml-3">
-                      <p class="fw-bold mb-1">ItemName</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="fw-normal mb-1">ItemType</p>
-                </td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-warning">
-                            <i class="fas fa-edit fa-lg fa-fw"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger">
-                          <i class="fas fa-trash fa-lg fa-fw"></i>
-                        </button>
-                    </div>
-                </td>
-              </tr>
+                  </td>
+                  <td>
+                    <p class="fw-normal mb-1"><%= (types!=='undefined') ? types[item.type] : item.type %> </p>
+                  </td>
+                  <td>
+                      <div class="d-flex align-items-center">
+                          <a href="/inventory/edit/<%= item._id %> " class="btn btn-link btn-sm btn-rounded text-warning">
+                              <i class="fas fa-edit fa-lg fa-fw"></i>
+                          </a>
+                          <a href="/inventory/del/<%= item._id %> " class="btn btn-link btn-sm btn-rounded text-danger">
+                            <i class="fas fa-trash fa-lg fa-fw"></i>
+                          </a>
+                      </div>
+                  </td>
+                </tr>
+              <% });%>  
             </tbody>
           </table>
     </div>

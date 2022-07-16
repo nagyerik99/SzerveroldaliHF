@@ -19,7 +19,7 @@ module.exports = function (app) {
   /**
    * Show all rental request, for the user
    */
-  app.get('/user/:userid/request',
+  app.get('/request',
     authMW(objectRepository),
     getUserMW(objectRepository),
     getRequestsMW(objectRepository),
@@ -29,27 +29,33 @@ module.exports = function (app) {
   /**
    * Accept rental request get/post if body undefined then get else post
    */
-  app.use('/user/:userid/request/edit/:requestid',
+  app.use('/request/edit/:requestid',
     authMW(objectRepository),
     getUserMW(objectRepository),
     getRequestMW(objectRepository),
-    saveRequestsMW(objectRepository)//this will redirect to request list page
+    saveRequestsMW(objectRepository),
+    function(req, res, next){
+      res.redirect("/request");
+    }
   );
 
     /**
    * Decline/Delete rental request
    */
-     app.get('/user/:userid/request/del/:requestid',
+     app.get('/request/del/:requestid',
      authMW(objectRepository),
      getUserMW(objectRepository),
      getRequestMW(objectRepository),
-     delRequestMW(objectRepository) //this will redirect to request list page
+     delRequestMW(objectRepository),
+     function(req, res, next){
+      res.redirect("/request");
+    }
    );
 
     /**
    * Show rented items for the user
    */
-     app.get('/user/:userid/rented',
+     app.get('/rented',
      authMW(objectRepository),
      getUserMW(objectRepository),
      getRentedMW(objectRepository),
@@ -67,7 +73,7 @@ module.exports = function (app) {
     /**
    * Show rentable items for the user, all the items that currently avaiable and not the user's.
    */
-     app.get('/user/:userid/rental',
+     app.get('/rental',
       authMW(objectRepository),
       getUserMW(objectRepository),
       getRentalsMW(objectRepository),
@@ -78,7 +84,7 @@ module.exports = function (app) {
     /**
      * Show rentable item details, where the user can send a rental request, for the owner.
      */
-    app.use('/user/:userid/rental/:rentalid',
+    app.use('/rental/rent/:rentalid',
      authMW(objectRepository),
      getUserMW(objectRepository),
      getRentalMW(objectRepository),

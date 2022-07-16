@@ -20,7 +20,7 @@ module.exports = function (app) {
   /**
    * Show user info page on account.html
    */
-  app.get('/user/:userid/account',
+  app.get('/account',
     authMW(objectRepository),
     getUserMW(objectRepository),
     renderMW(objectRepository, 'account')
@@ -29,17 +29,27 @@ module.exports = function (app) {
   /**
    * Edit user data on accsettings.html
    */
-  app.use('/user/:userid/edit',
+  app.use('/account/edit',
     authMW(objectRepository),
     getUserMW(objectRepository),
     editUserMW(objectRepository),//this will redirect if this was a post request
     renderMW(objectRepository, 'accsettings')
   );
 
+     app.get('/account/delete',
+     authMW(objectRepository),
+     getUserMW(objectRepository),
+     delUserMW(objectRepository),
+     function(req, res, next){
+      res.redirect("/");
+     }
+   );
+ 
+
   /**
    * Delete user, if no-one rents, his/her items currently.
    */
-  app.get('/user/:userid/del',
+  app.get('/account/del/:userid',
     authMW(objectRepository),
     getUserMW(objectRepository),
     getInventoryMW(objectRepository),
@@ -58,7 +68,10 @@ module.exports = function (app) {
 
   app.get('/logout',
     authMW(objectRepository),
-    logoutMW(objectRepository)//redirect to the landing page
+    logoutMW(objectRepository),
+    function(req, res, next){
+      res.redirect("/");
+     }
   );
 
   /**

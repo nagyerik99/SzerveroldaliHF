@@ -13,7 +13,7 @@ module.exports = function (app) {
   /**
    * Show all registered rentable item
    */
-  app.get('/user/:userid/inventory',
+  app.get('/inventory',
     authMW(objectRepository),
     getUserMW(objectRepository),
     getInventoriesMW(objectRepository),
@@ -23,7 +23,7 @@ module.exports = function (app) {
   /**
    * Add inventory item
    */
-   app.use('/user/:userid/inventory/new',
+   app.use('/inventory/new',
    authMW(objectRepository),
    getUserMW(objectRepository),
    saveInventoryMW(objectRepository),//this will redirect if this was a post request 
@@ -33,7 +33,7 @@ module.exports = function (app) {
     /**
    * Edit inventory item
    */
-     app.use('/user/:userid/inventory/edit/:inventoryid',
+     app.use('/inventory/edit/:inventoryid',
      authMW(objectRepository),
      getUserMW(objectRepository),
      getInventoryMW(objectRepository),
@@ -45,10 +45,13 @@ module.exports = function (app) {
   /**
    * Delete inventory item
    */
-  app.get('/user/:userid/inventory/del/:inventoryid',
+  app.get('/inventory/del/:inventoryid',
     authMW(objectRepository),
     getUserMW(objectRepository),
     getInventoryMW(objectRepository),
-    delInventoryMW(objectRepository)//redirect to the inventory page
+    delInventoryMW(objectRepository),
+    function(req, res, next){
+      return res.redirect("/inventory");
+    }
     );
 };

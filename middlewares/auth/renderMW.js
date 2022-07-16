@@ -7,7 +7,6 @@ module.exports = function (objectrepository, ejsfile) {
       
     return function (req, res, next) {
       res.locals.pagetitle = ejsfile;
-      console.log(ejsfile);
       res.render(ejsfile,res.locals);
     };
   

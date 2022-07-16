@@ -15,63 +15,27 @@
               </tr>
             </thead>
             <tbody>
-                <tr>
+              <% renteditems.forEach(function(item){%>
+                <tr class="<%= (item.date_to < new Date()) ? "table-info" : ""%> ">
                     <td>
                       <div class="d-flex align-items-center">
                          <i class="fas fa-screwdriver fa-2x fa-fw"></i>
                         <div class="ml-3">
-                          <p class="fw-bold mb-1 font-weight-bold">ItemName</p>
+                          <p class="fw-bold mb-1 font-weight-bold"><%= item.itemname %> </p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p class="fw-normal mb-1 font-italic">ItemType</p>
+                      <p class="fw-normal mb-1 font-italic"><%=types[item.type]%> </p>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 08:00</p>
+                        <p class="fw-normal mb-1 font-weight-bold"><%= item.date_from.toDateString()%> </p>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1 font-weight-bold">2022-11-11 12:00</p>
+                        <p class="fw-normal mb-1 font-weight-bold"><%= item.date_to.toDateString() %> </p>
                     </td>
                   </tr>
-                  <tr class="table-info">
-                    <td>
-                      <div class="d-flex align-items-center">
-                         <i class="fas fa-screwdriver fa-2x fa-fw"></i>
-                        <div class="ml-3">
-                          <p class="fw-bold mb-1 font-weight-bold">ItemName</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1 font-italic">ItemType</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 font-weight-bold">2021-01-11 08:00</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 font-weight-bold">2021-04-11 12:00</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                         <i class="fas fa-screwdriver fa-2x fa-fw"></i>
-                        <div class="ml-3">
-                          <p class="fw-bold mb-1 font-weight-bold">ItemName</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1 font-italic">ItemType</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 font-weight-bold">2022-05-11 08:00</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 font-weight-bold">2022-05-12 08:00</p>
-                    </td>
-                  </tr>
+                  <% });%> 
             </tbody>
           </table>
     </div>
