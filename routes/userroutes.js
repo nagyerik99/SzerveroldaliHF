@@ -12,6 +12,7 @@ var checkPasswordMW = require('../middlewares/auth/checkPasswordMW');
 var checkEmailMW = require('../middlewares/auth/checkEmailMW');
 var sendPasswordMW = require('../middlewares/auth/sendPasswordMW');
 var inverseAuthMW = require('../middlewares/auth/inverseAuthMW');
+var logoutMW = require('../middlewares/auth/logoutMW');
 
 module.exports = function (app) {
   var objectRepository = {};
@@ -19,7 +20,7 @@ module.exports = function (app) {
   /**
    * Show user info page on account.html
    */
-  app.get('/user/:userid',
+  app.get('/user/:userid/account',
     authMW(objectRepository),
     getUserMW(objectRepository),
     renderMW(objectRepository, 'account')
@@ -31,7 +32,7 @@ module.exports = function (app) {
   app.use('/user/:userid/edit',
     authMW(objectRepository),
     getUserMW(objectRepository),
-    editUserMW(objectRepository),
+    editUserMW(objectRepository),//this will redirect if this was a post request
     renderMW(objectRepository, 'accsettings')
   );
 
@@ -43,27 +44,30 @@ module.exports = function (app) {
     getUserMW(objectRepository),
     getInventoryMW(objectRepository),
     checkRentalMW(objectRepository),
-    delUserMW(objectRepository),
-    //simple redirect
-    function (req, res, next) {
-      return res.redirect('/login');
-    });
+    delUserMW(objectRepository)//redirect to the landing page
+    );
 
     /**
      * Login try
      */
   app.use('/login',
-    inverseAuthMW(objectRepository),
-    checkPasswordMW(objectRepository),
+    inverseAuthMW(objectRepository),//redirect if already logged in
+    checkPasswordMW(objectRepository),//redirect on post 
     renderMW(objectRepository,'login')
+  );
+
+  app.get('/logout',
+    authMW(objectRepository),
+    logoutMW(objectRepository)//redirect to the landing page
   );
 
   /**
    * New password request
    */
-  app.use('/login/newpass',
+  app.use('/newpass',
+    inverseAuthMW(objectRepository),//redirect if already logged in
     checkEmailMW(objectRepository),
-    sendPasswordMW(objectRepository),
+    sendPasswordMW(objectRepository),//redirect to the /login page after post request
     renderMW(objectRepository,'newpass')
   );
 

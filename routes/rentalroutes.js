@@ -27,16 +27,13 @@ module.exports = function (app) {
   );
 
   /**
-   * Accept rental request
+   * Accept rental request get/post if body undefined then get else post
    */
   app.use('/user/:userid/request/edit/:requestid',
     authMW(objectRepository),
     getUserMW(objectRepository),
     getRequestMW(objectRepository),
-    saveRequestsMW(objectRepository),
-    function (req, res, next) {
-        return res.redirect('/user/:userid/request');
-      }  
+    saveRequestsMW(objectRepository)//this will redirect to request list page
   );
 
     /**
@@ -46,10 +43,7 @@ module.exports = function (app) {
      authMW(objectRepository),
      getUserMW(objectRepository),
      getRequestMW(objectRepository),
-     delRequestMW(objectRepository),
-     function (req, res, next) {
-        return res.redirect('/user/:userid/request');
-     }  
+     delRequestMW(objectRepository) //this will redirect to request list page
    );
 
     /**
@@ -63,7 +57,7 @@ module.exports = function (app) {
    );
 
     /**
-   * Show landingpage for the user if not registered or loged in
+   * Show landingpage for the user if not registered or logged in
    */
     app.get('/',
      authMW(objectRepository),
@@ -73,7 +67,7 @@ module.exports = function (app) {
     /**
    * Show rentable items for the user, all the items that currently avaiable and not the user's.
    */
-     app.get('/rental',
+     app.get('/user/:userid/rental',
       authMW(objectRepository),
       getUserMW(objectRepository),
       getRentalsMW(objectRepository),
@@ -84,11 +78,11 @@ module.exports = function (app) {
     /**
      * Show rentable item details, where the user can send a rental request, for the owner.
      */
-    app.use('/rental/:rentalid',
+    app.use('/user/:userid/rental/:rentalid',
      authMW(objectRepository),
      getUserMW(objectRepository),
      getRentalMW(objectRepository),
-     saveRentalMW(objectRepository),
+     saveRentalMW(objectRepository),//this will redirect if it was a post rental request.
      renderMW(objectRepository,'rentdetails')
     );
 };

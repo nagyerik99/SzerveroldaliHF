@@ -3,16 +3,10 @@ var app = express();
 
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var helmet = require('helmet');
-
-//todo include helmet
-//todo bodyParser
 
 app.set('view engine', 'ejs');
 
 app.use(express.static('static'));
-
-app.use(helmet());
 
 app.use(session({
     secret: 'veryvery secret key',

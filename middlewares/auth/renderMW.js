@@ -3,10 +3,12 @@
  * @param {*} objectrepository 
  * @returns 
  */
-module.exports = function (objectrepository) {
+module.exports = function (objectrepository, ejsfile) {
       
     return function (req, res, next) {
-      return next();
+      res.locals.pagetitle = ejsfile;
+      console.log(ejsfile);
+      res.render(ejsfile,res.locals);
     };
   
   };

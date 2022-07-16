@@ -23,12 +23,12 @@ module.exports = function (app) {
   /**
    * Add inventory item
    */
-  app.use('/user/:userid/inventory/new',
-    authMW(objectRepository),
-    getUserMW(objectRepository),
-    saveInventoryMW(objectRepository),
-    renderMW(objectRepository, 'newitem')
-  );
+   app.use('/user/:userid/inventory/new',
+   authMW(objectRepository),
+   getUserMW(objectRepository),
+   saveInventoryMW(objectRepository),//this will redirect if this was a post request 
+   renderMW(objectRepository, 'newitem')
+ );
 
     /**
    * Edit inventory item
@@ -37,7 +37,7 @@ module.exports = function (app) {
      authMW(objectRepository),
      getUserMW(objectRepository),
      getInventoryMW(objectRepository),
-     saveInventoryMW(objectRepository),
+     saveInventoryMW(objectRepository),//this will redirect if this was a post request 
      renderMW(objectRepository, 'newitem')
  
    );
@@ -49,9 +49,6 @@ module.exports = function (app) {
     authMW(objectRepository),
     getUserMW(objectRepository),
     getInventoryMW(objectRepository),
-    delInventoryMW(objectRepository),
-    //simple redirect
-    function (req, res, next) {
-      return res.redirect('/user/:userid/inventory');
-    });
+    delInventoryMW(objectRepository)//redirect to the inventory page
+    );
 };
