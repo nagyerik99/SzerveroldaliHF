@@ -52,7 +52,6 @@ getRentedMW
 getRentalsMW
 getRentalMW
 saveRentalMW
-checkRentalMW
 
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
@@ -66,8 +65,10 @@ bejelentkezes, regisztracio elfelejtett jelszo:
                                                             -->Sikertelen /login és hibauzenet renderelese
 
 
-    GET /login/newpass --> newpass.html
-    POST /login/newpass                                     --> uj jleszo igenylese
+    GET /logout --> kijelentkezés, session destroy
+
+    GET /newpass --> newpass.html
+    POST /newpass                                     --> uj jleszo igenylese
                                                             console.logra uj password
                                                             ha nincs megadott jelszoval felhasznalo akkor hiba megjelenitese //reload
     checkEmailMW
@@ -107,7 +108,6 @@ Felhasznalo szerkesztese megtekintese, trolese:
         autMW
         getUserMW
         getInventoryMW
-        checkRentalMW           -- ha van folyamatban levo kolcsonzes, akkor next es error msg +render
         delUserMW               --csak akkor lehet torolni a felhasznalot, ha nics folyamatban semmilyen kolcsonzes tole. :)
 
 ---------------------------------------------------------------------------------------------------

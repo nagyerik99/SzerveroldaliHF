@@ -1,85 +1,104 @@
-<%- include('header') %> 
-<%- include('navbar') %> 
+<%- include('header') %>
+  <%- include('navbar') %>
     <div class="container col-8 mt-2">
-        <div class="row mb-2">
-          <div class="col-sm-10 col-12 mt-2"><h2 class="font-weight-bold" id="namePlace">Item Name</h2></div>
+      <div class="row mb-2">
+        <div class="col-sm-10 col-12 mt-2">
+          <h2 class="font-weight-bold" id="namePlace">
+            <%= rental.name %>
+          </h2>
+        </div>
       </div>
-		<div>
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="card shadow" style="border-radius: 15px;">
-						<div class="card-body">
-							<div class="d-flex flex-column align-items-center text-center">
-                                <i class="fas fa-screwdriver fa-7x  fa-fw"></i>
-								<div class="mt-4">
-                                    <div class="d-flex row justify-content-between">
-                                        <p class="mr-2"><i class="fas fa-user fa-lg fa-fw"></i></p>
-                                        <h4 id="typePlace"><%= rental.name %> </h4>
-                                    </div>
-                                    <hr class="my-3">
-									<p class="text-secondary mb-1"><%= types[rental.type] %> </p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-8">
-					<div class="card shadow" style="border-radius: 15px;">
-						<div class="card-body">
-                            <form method="post">
-                              <input type="hidden" name="id" id="id" value="<%= rental._id %>">
-                                <div class="row mb-3">
-                                    <div class="col-sm-3 d-flex align-items-center">
-                                        <label class=" h6 mb-0" for="date_from">Date From</label>
-                                    </div>
-                                    <div class=" col-sm-5 text-secondary input-group date" id="datepicker_from">
-                                      <input type="text" id="date_from" class="form-control">
-                                      <span class="input-group-append">
-                                        <span class="input-group-text bg-white d-block">
-                                          <i class="fas fa-calendar fa-lg fa-fw"></i>
-                                        </span>
-                                      </span>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3 d-flex align-items-center">
-                                        <label class="h6 mb-0" for="date_to">Date To</label>
-                                    </div>
-                                    <div class="col-sm-5 text-secondary input-group date" id="datepicker_to">
-                                      <input type="text" id="date_to" class="form-control">
-                                      <span class="input-group-append">
-                                        <span class="input-group-text bg-white d-block">
-                                          <i class="fas fa-calendar fa-lg fa-fw"></i>
-                                        </span>
-                                      </span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="submit" class="btn btn-primary float-right pl-4 pr-4" value="Rent">
-                                    </div>
-                                </div>
-                            </form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+      <div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card shadow" style="border-radius: 15px;">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <i class="fas fa-screwdriver fa-7x  fa-fw"></i>
+                  <div class="mt-4">
+                    <div class="d-flex row justify-content-between">
+                      <p class="mr-2"><i class="fas fa-user fa-lg fa-fw"></i></p>
+                      <h4 id="typePlace">
+                        <%= owner.name %>
+                      </h4>
+                    </div>
+                    <hr class="my-3">
+                    <p class="text-secondary mb-1">
+                      <%= types[rental.type] %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card shadow" style="border-radius: 15px;">
+              <div class="card-body">
+                <%- include('errorbox') %> 
+                <form method="post">
+                  <input type="hidden" name="id" id="id" value="<%= rental._id %>">
+                  <div class="row mb-3">
+                    <div class="col-sm-3 d-flex align-items-center">
+                      <label class=" h6 mb-0" for="date_from">Date From</label>
+                    </div>
+                    <div class=" col-sm-5 text-secondary input-group date" id="datepicker_from">
+                      <input type="text" id="date_from" name="date_from" class="form-control">
+                      <span class="input-group-append">
+                        <span class="input-group-text bg-white d-block">
+                          <i class="fas fa-calendar fa-lg fa-fw"></i>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-sm-3 d-flex align-items-center">
+                      <label class="h6 mb-0" for="date_to">Date To</label>
+                    </div>
+                    <div class="col-sm-5 text-secondary input-group date" id="datepicker_to">
+                      <input type="text" id="date_to"  name="date_to" class="form-control">
+                      <span class="input-group-append">
+                        <span class="input-group-text bg-white d-block">
+                          <i class="fas fa-calendar fa-lg fa-fw"></i>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="submit" class="btn btn-primary float-right pl-4 pr-4" value="Rent">
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+      integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript">
-      $(function(){
+      $(function () {
         $('#datepicker_from').datepicker();
         $('#datepicker_to').datepicker();
       })
     </script>
-  </body>
-</html>
+    </body>
+
+    </html>

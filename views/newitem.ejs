@@ -18,15 +18,16 @@
           <div class="col-lg-8">
             <div class="card shadow" style="border-radius: 15px;">
               <div class="card-body">
+                <%- include('errorbox') %>
                 <form method="post">
-                  <input type="hidden" name="id" id="id" value="<%= inventory._id %>">
+                  <input type="hidden" name="id" id="id" value="<%= (typeof inventory==='undefined' ) ? '' : inventory._id %>">
                   <div class="row mb-3">
                     <div class="d-flex align-items-center col-sm-3">
                       <label class=" h6 mb-0" for="name">Item Name</label>
                     </div>
                     <div class="col-sm-9 text-secondary">
                       <input name="name" id="name" type="text" class="form-control" placeholder="Items name"
-                      value="<%= (typeof inventory==='undefined' )? "" : inventory.name %> "
+                      value="<%= (typeof inventory==='undefined' )? '' : inventory.name %> "
                       >
                     </div>
                   </div>

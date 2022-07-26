@@ -1,20 +1,27 @@
+const requireOption = require("../common");
+
 /**
  * Gets all the rentable item that was registered by the user.
  * @param {*} objectrepository 
  * @returns 
  */
 module.exports = function (objectrepository) {
-      
-    return function (req, res, next) {
-      req.session.userid = "teszelek";
-      res.locals.inventories = [
-        {_id: "1", name : "ItemName1", type: "diy"},
-        {_id: "2", name : "ItemName2", type: "gadgets"},
-        {_id: "3", name : "ItemName3", type: "other"},
-        {_id: "4", name : "ItemName4", type: "transport"},
-      ];
+  const itemModel = requireOption(objectrepository, "itemModel");
 
-      return next();
+    return function (req, res, next) {
+      if(typeof res.locals.user === 'undefined'){
+        return next("no user error");
+      }
+
+      itemModel.find({_owner: res.locals.user._id},(err,items)=>{
+        if(err){
+          return next(err);
+        }
+
+        res.locals.inventories = items;
+
+        return next();
+      });
     };
   
   };

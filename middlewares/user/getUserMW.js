@@ -1,22 +1,27 @@
+const requireOption = require("../common");
+
 /**
  * Gets a given user, if capable
- * @param {*} objectrepository 
- * @returns 
+ * @param {*} objectrepository
+ * @returns
  */
 module.exports = function (objectrepository) {
-      
-    return function (req, res, next) {
+  const userModel = requireOption(objectrepository, "userModel");
 
-      //TODO here i will access the db user entity by the id, stored in the express session.
-      res.locals.user = {
-        _id : '11',
-        name : 'Teszt Elek',
-        door_number : '19/B',
-        email: 'tesztelek@teszt.hu'
-      };
+  return function (req, res, next) {
+    userModel.findOne(
+      {
+        _id: req.session.userid,
+      },
+      (err, user) => {
+        if (err || !user) {
+          return next(err);
+        }
 
-      return next();
-    };
-  
+        res.locals.user = user;
+        console.log(res.locals.user);
+        return next();
+      }
+    );
   };
-  
+};

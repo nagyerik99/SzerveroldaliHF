@@ -1,14 +1,23 @@
-var authMW = require('../middlewares/auth/autMW');
-var renderMW = require('../middlewares/auth/renderMW');
-var getInventoriesMW = require('../middlewares/inventory/getInventoriesMW');
-var getInventoryMW = require('../middlewares/inventory/getInventoryMW');
-var saveInventoryMW = require('../middlewares/inventory/saveInventoryMW');
-var delInventoryMW = require('../middlewares/inventory/delInventoryMW');
-var getUserMW = require('../middlewares/user/getUserMW');
+const authMW = require('../middlewares/auth/autMW');
+const renderMW = require('../middlewares/auth/renderMW');
+const getInventoriesMW = require('../middlewares/inventory/getInventoriesMW');
+const getInventoryMW = require('../middlewares/inventory/getInventoryMW');
+const saveInventoryMW = require('../middlewares/inventory/saveInventoryMW');
+const delInventoryMW = require('../middlewares/inventory/delInventoryMW');
+const getUserMW = require('../middlewares/user/getUserMW');
 
+const userModel = require('../models/user');
+const rentedModel = require('../models/rented');
+const itemModel = require('../models/item');
+const checkItemDataMW = require('../middlewares/inventory/checkItemDataMW');
+const checkDelInventoryMW = require('../middlewares/inventory/checkDelInventoryMW');
 
 module.exports = function (app) {
-  var objectRepository = {};
+  var objectRepository = {
+    userModel : userModel,
+    rentedModel : rentedModel,
+    itemModel : itemModel
+  };
 
   /**
    * Show all registered rentable item
@@ -26,6 +35,7 @@ module.exports = function (app) {
    app.use('/inventory/new',
    authMW(objectRepository),
    getUserMW(objectRepository),
+   checkItemDataMW(objectRepository),
    saveInventoryMW(objectRepository),//this will redirect if this was a post request 
    renderMW(objectRepository, 'newitem')
  );
@@ -36,6 +46,7 @@ module.exports = function (app) {
      app.use('/inventory/edit/:inventoryid',
      authMW(objectRepository),
      getUserMW(objectRepository),
+     checkItemDataMW(objectRepository),
      getInventoryMW(objectRepository),
      saveInventoryMW(objectRepository),//this will redirect if this was a post request 
      renderMW(objectRepository, 'newitem')
@@ -49,9 +60,9 @@ module.exports = function (app) {
     authMW(objectRepository),
     getUserMW(objectRepository),
     getInventoryMW(objectRepository),
-    delInventoryMW(objectRepository),
-    function(req, res, next){
-      return res.redirect("/inventory");
-    }
+    checkDelInventoryMW(objectRepository),
+    delInventoryMW(objectRepository), //this is the one that redirects
+    getInventoriesMW(objectRepository), //if the del does not redirect that means cant delete item
+    renderMW(objectRepository, 'inventory')
     );
 };

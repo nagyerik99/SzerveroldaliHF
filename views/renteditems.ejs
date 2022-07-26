@@ -15,24 +15,24 @@
               </tr>
             </thead>
             <tbody>
-              <% renteditems.forEach(function(item){%>
-                <tr class="<%= (item.date_to < new Date()) ? "table-info" : ""%> ">
+              <% rentedItems.forEach(function(rent){%>
+                <tr class="<%= (rent.date_to < new Date()) ? "table-info" : ""%> ">
                     <td>
                       <div class="d-flex align-items-center">
                          <i class="fas fa-screwdriver fa-2x fa-fw"></i>
                         <div class="ml-3">
-                          <p class="fw-bold mb-1 font-weight-bold"><%= item.itemname %> </p>
+                          <p class="fw-bold mb-1 font-weight-bold"><%= rent._item.name %> </p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p class="fw-normal mb-1 font-italic"><%=types[item.type]%> </p>
+                      <p class="fw-normal mb-1 font-italic"><%=types[rent._item.type]%> </p>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1 font-weight-bold"><%= item.date_from.toDateString()%> </p>
+                        <p class="fw-normal mb-1 font-weight-bold"><%= rent.date_from.toDateString()%> </p>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1 font-weight-bold"><%= item.date_to.toDateString() %> </p>
+                        <p class="fw-normal mb-1 font-weight-bold"><%= rent.date_to.toDateString() %> </p>
                     </td>
                   </tr>
                   <% });%> 

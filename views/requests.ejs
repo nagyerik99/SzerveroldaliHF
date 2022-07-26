@@ -22,19 +22,19 @@
                       <div class="d-flex align-items-center">
                          <i class="fas fa-user fa-2x fa-fw"></i>
                         <div class="ml-3">
-                          <p class="fw-bold mb-0 font-weight-bold"><%= request.renter.name %> </p>
-                          <p class="fw-bold mb-1"><%= request.renter.door_number %> </p>
+                          <p class="fw-bold mb-0 font-weight-bold"><%= request._renter.name %> </p>
+                          <p class="fw-bold mb-1"><%= request._renter.door_number %> </p>
                         </div>
                       </div>
                     </td>
                     <td class="align-middle">
-                      <p class="fw-normal mb-1 font-italic"><%= request.item.name %> </p>
+                      <p class="fw-normal mb-1 font-italic"><%= request._item.name %> </p>
                     </td>
                     <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold"><%= request.date_from %> </p>
+                        <p class="fw-normal mb-1 font-weight-bold"><%= request.date_from.toDateString() %> </p>
                     </td>
                     <td class="align-middle">
-                        <p class="fw-normal mb-1 font-weight-bold"><%= request.date_to %> </p>
+                        <p class="fw-normal mb-1 font-weight-bold"><%= request.date_to.toDateString() %> </p>
                     </td>
                     <td class="align-middle">
                         <div class="d-flex align-items-center">
