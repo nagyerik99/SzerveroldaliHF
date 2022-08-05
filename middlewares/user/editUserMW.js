@@ -5,14 +5,14 @@
  */
 module.exports = function (objectrepository) {
   return function (req, res, next) {
-    console.log(req.body);
+
     if (
       req.method !== "POST" ||
       typeof req.body.name === 'undefined' ||
       typeof req.body.email === 'udnefined' ||
       typeof req.body.door_number === 'undefined'
     ) {
-      console.log("ide lep be");
+
       return next();
     }
 

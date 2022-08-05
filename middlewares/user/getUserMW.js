@@ -19,7 +19,7 @@ module.exports = function (objectrepository) {
         }
 
         res.locals.user = user;
-        console.log(res.locals.user);
+
         return next();
       }
     );

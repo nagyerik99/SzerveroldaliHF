@@ -26,7 +26,7 @@ module.exports = function (objectrepository) {
       }
 
       res.locals.requests = requests;
-      console.log(requests);
+
       return next();
     });
   };
