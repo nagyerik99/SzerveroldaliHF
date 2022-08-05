@@ -10,7 +10,6 @@ const getRentedMW = require('../middlewares/rental/getRentedMW');
 const getRentalsMW = require('../middlewares/rental/getRentalsMW');
 const getRentalMW = require('../middlewares/rental/getRentalMW');
 const saveRentalMW = require('../middlewares/rental/saveRentalMW');
-const inverseAuthMW = require('../middlewares/auth/inverseAuthMW');
 const mainRedirectMW = require('../middlewares/auth/mainRedirectMW');
 const checkRentalDataMW = require('../middlewares/rental/checkRentalDataMW');
 

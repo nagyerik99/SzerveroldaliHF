@@ -6,13 +6,11 @@ const getUserMW = require('../middlewares/user/getUserMW');
 const editUserMW = require('../middlewares/user/editUserMW');
 const saveUserMW = require('../middlewares/user/saveUserMW');
 const delUserMW = require('../middlewares/user/delUserMW');
-const getInventoryMW = require('../middlewares/inventory/getInventoryMW');
 const checkPasswordMW = require('../middlewares/auth/checkPasswordMW');
 const checkEmailMW = require('../middlewares/auth/checkEmailMW');
 const sendPasswordMW = require('../middlewares/auth/sendPasswordMW');
 const inverseAuthMW = require('../middlewares/auth/inverseAuthMW');
 const logoutMW = require('../middlewares/auth/logoutMW');
-const checkRentalMW = require('../middlewares/rental/checkRentalMW');
 
 const inverseCheckEmailMW = require('../middlewares/auth/inverseCheckEmailMW');
 const checkRegDataMW = require('../middlewares/auth/checkRegDataMW');

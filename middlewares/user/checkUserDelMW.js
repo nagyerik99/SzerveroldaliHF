@@ -4,7 +4,6 @@
  * @returns 
  */
 module.exports = function (objectrepository) {
-      const rentedModel = requireOption(objectrepository, 'rentedModel');
     return function (req, res, next) {
       return next();      
     };

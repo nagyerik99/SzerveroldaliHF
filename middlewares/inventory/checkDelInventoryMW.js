@@ -1,5 +1,3 @@
-const requireOption = require("../common");
-
 /**
  * It checks wether the inventory item, can be deleted.
  * It can not be deleted if, the item is already rented.

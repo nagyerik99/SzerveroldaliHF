@@ -1,5 +1,3 @@
-const requireOption = require("../common");
-
 /**
  * Gets a user, with the logged in user's id
  * Userid comes from session

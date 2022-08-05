@@ -1,5 +1,3 @@
-const requireOption = require("../common");
-
 /**
  * It checks wether all the data was filled out during the edit/save of the item.
  * @param {*} objectrepository

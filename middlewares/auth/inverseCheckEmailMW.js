@@ -1,5 +1,3 @@
-const requireOption = require("../common");
-
 /**
  * checking the given eamil on registration, and if it is already registered, sends warning.
  * @param objectrepository
