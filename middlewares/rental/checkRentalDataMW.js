@@ -34,7 +34,7 @@ const requireOption = require("../common");
         if(err || !item){
           return next(err);
         }
-        console.log(item._rentals);
+
         item._rentals.forEach((rental)=>{
           let from = rental.date_from;
           let to = rental.date_to;
