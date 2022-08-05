@@ -1,6 +1,11 @@
 var expect = require("chai").expect;
 var getInventoriesMW = require("../../../middlewares/inventory/getInventoriesMW");
 
+/**
+ * ADDED NPM RUN SCRIPT:
+ * NPM RUN COVERAGE RUNS ISTANBUL CODE COVERAGE OVER MOCHA
+ * FOR MORE SCRIPTS PLEASE LOOK AT THE PACKAGE.JSON FILE
+ */
 describe("getInventories middleware ", function () {
   it("should return with no user error", (done) => {
     const mw = getInventoriesMW({

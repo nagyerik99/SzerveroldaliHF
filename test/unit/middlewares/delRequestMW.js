@@ -1,6 +1,12 @@
 var expect = require("chai").expect;
 var delRequestMW = require("../../../middlewares/request/delRequestMW");
 
+
+/**
+ * ADDED NPM RUN SCRIPT:
+ * NPM RUN COVERAGE RUNS ISTANBUL CODE COVERAGE OVER MOCHA
+ * FOR MORE SCRIPTS PLEASE LOOK AT THE PACKAGE.JSON FILE
+ */
 describe("delRequest middleware ", function () {
   it("should return with no request object error", (done) => {
     const mw = delRequestMW({});

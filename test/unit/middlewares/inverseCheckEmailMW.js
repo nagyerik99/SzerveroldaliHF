@@ -1,6 +1,11 @@
 var expect = require("chai").expect;
 var inverseCheckEmailMW = require("../../../middlewares/auth/inverseCheckEmailMW");
 
+/**
+ * ADDED NPM RUN SCRIPT:
+ * NPM RUN COVERAGE RUNS ISTANBUL CODE COVERAGE OVER MOCHA
+ * FOR MORE SCRIPTS PLEASE LOOK AT THE PACKAGE.JSON FILE
+ */
 describe("inverseCheckEmail middleware ", function () {
   it("should return without error because of error length", (done) => {
     const mw = inverseCheckEmailMW({
