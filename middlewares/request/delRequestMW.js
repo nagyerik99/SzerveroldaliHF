@@ -14,7 +14,6 @@ module.exports = function (objectrepository) {
         if(err){
           return next(err);
         }
-        console.log("torolte");
         return res.redirect('/request');
       });
     };
