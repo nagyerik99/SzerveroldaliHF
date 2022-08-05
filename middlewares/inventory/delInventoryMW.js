@@ -1,7 +1,8 @@
 /**
  * Deletes the selected item from the users inventory
- * @param {} objectrepository 
- * @returns 
+ * Delete all the rent requests where the item is this
+ * @param {} objectrepository
+ * @returns
  */
 module.exports = function (objectrepository) {
       

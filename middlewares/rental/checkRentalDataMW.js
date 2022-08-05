@@ -1,16 +1,14 @@
 const requireOption = require("../common");
 
 /**
- * Gets a user, with the logged in user's id
- * Userid comes from session
+ * It checks wether all the data was filled out during the edit/save of the item.
  * @param {*} objectrepository
  * @returns
  */
-module.exports = function (objectrepository) {
-      
+ module.exports = function (objectrepository) {
+
     return function (req, res, next) {
       return next();
-    };
-  
+      };
   };
   

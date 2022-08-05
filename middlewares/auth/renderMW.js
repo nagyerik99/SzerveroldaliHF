@@ -3,7 +3,7 @@
  * @param {*} objectrepository 
  * @returns 
  */
-module.exports = function (objectrepository) {
+module.exports = function (objectrepository, ejsfile) {
       
     return function (req, res, next) {
       return next();

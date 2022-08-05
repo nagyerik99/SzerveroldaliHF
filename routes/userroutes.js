@@ -1,17 +1,22 @@
-var authMW = require('../middlewares/auth/autMW');
-var renderMW = require('../middlewares/auth/renderMW');
+const authMW = require('../middlewares/auth/autMW');
+const renderMW = require('../middlewares/auth/renderMW');
 
 
-var getUserMW = require('../middlewares/user/getUserMW');
-var editUserMW = require('../middlewares/user/editUserMW');
-var saveUserMW = require('../middlewares/user/saveUserMW');
-var delUserMW = require('../middlewares/user/delUserMW');
-var getInventoryMW = require('../middlewares/inventory/getInventoryMW');
-var checkRentalMW = require('../middlewares/rental/checkRentalMW');
-var checkPasswordMW = require('../middlewares/auth/checkPasswordMW');
-var checkEmailMW = require('../middlewares/auth/checkEmailMW');
-var sendPasswordMW = require('../middlewares/auth/sendPasswordMW');
-var inverseAuthMW = require('../middlewares/auth/inverseAuthMW');
+const getUserMW = require('../middlewares/user/getUserMW');
+const editUserMW = require('../middlewares/user/editUserMW');
+const saveUserMW = require('../middlewares/user/saveUserMW');
+const delUserMW = require('../middlewares/user/delUserMW');
+const getInventoryMW = require('../middlewares/inventory/getInventoryMW');
+const checkPasswordMW = require('../middlewares/auth/checkPasswordMW');
+const checkEmailMW = require('../middlewares/auth/checkEmailMW');
+const sendPasswordMW = require('../middlewares/auth/sendPasswordMW');
+const inverseAuthMW = require('../middlewares/auth/inverseAuthMW');
+const logoutMW = require('../middlewares/auth/logoutMW');
+const checkRentalMW = require('../middlewares/rental/checkRentalMW');
+
+const inverseCheckEmailMW = require('../middlewares/auth/inverseCheckEmailMW');
+const checkRegDataMW = require('../middlewares/auth/checkRegDataMW');
+const checkUserDelMW = require('../middlewares/user/checkUserDelMW');
 
 module.exports = function (app) {
   var objectRepository = {};
@@ -19,7 +24,7 @@ module.exports = function (app) {
   /**
    * Show user info page on account.html
    */
-  app.get('/user/:userid',
+  app.get('/account',
     authMW(objectRepository),
     getUserMW(objectRepository),
     renderMW(objectRepository, 'account')
@@ -28,42 +33,45 @@ module.exports = function (app) {
   /**
    * Edit user data on accsettings.html
    */
-  app.use('/user/:userid/edit',
+  app.use('/account/edit',
     authMW(objectRepository),
     getUserMW(objectRepository),
-    editUserMW(objectRepository),
+    editUserMW(objectRepository),//this will redirect if this was a post request
     renderMW(objectRepository, 'accsettings')
   );
 
-  /**
-   * Delete user, if no-one rents, his/her items currently.
-   */
-  app.get('/user/:userid/del',
-    authMW(objectRepository),
-    getUserMW(objectRepository),
-    getInventoryMW(objectRepository),
-    checkRentalMW(objectRepository),
-    delUserMW(objectRepository),
-    //simple redirect
-    function (req, res, next) {
-      return res.redirect('/login');
-    });
+    app.get('/account/delete',
+     authMW(objectRepository),
+     getUserMW(objectRepository),
+     checkUserDelMW(objectRepository),
+     delUserMW(objectRepository), //if all works fine then redirect to landing page, else show error
+     renderMW(objectRepository, 'accsettings')
+   );
 
     /**
      * Login try
      */
   app.use('/login',
-    inverseAuthMW(objectRepository),
-    checkPasswordMW(objectRepository),
+    inverseAuthMW(objectRepository),//redirect if already logged in
+    checkPasswordMW(objectRepository),//redirect on post 
     renderMW(objectRepository,'login')
+  );
+
+  app.get('/logout',
+    authMW(objectRepository),
+    logoutMW(objectRepository),
+    function(req, res, next){
+      res.redirect("/");
+     }
   );
 
   /**
    * New password request
    */
-  app.use('/login/newpass',
+  app.use('/newpass',
+    inverseAuthMW(objectRepository),//redirect if already logged in
     checkEmailMW(objectRepository),
-    sendPasswordMW(objectRepository),
+    sendPasswordMW(objectRepository),//redirect to the /login page after post request
     renderMW(objectRepository,'newpass')
   );
 
@@ -72,7 +80,8 @@ module.exports = function (app) {
    */
   app.use('/registration',
     inverseAuthMW(objectRepository),
-    checkEmailMW(objectRepository),
+    checkRegDataMW(objectRepository),
+    inverseCheckEmailMW(objectRepository),
     saveUserMW(objectRepository),
     renderMW(objectRepository, 'registration')
   );

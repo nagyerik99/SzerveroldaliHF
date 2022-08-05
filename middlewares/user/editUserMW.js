@@ -1,7 +1,7 @@
 /**
- * Edit a gicen users informations like email, name, doornumber or password.
- * @param {*} objectrepository 
- * @returns 
+ * Edit a given users informations like email, name, doornumber or password.
+ * @param {*} objectrepository
+ * @returns
  */
 module.exports = function (objectrepository) {
       

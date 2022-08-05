@@ -1,7 +1,7 @@
 /**
  * Registers the user with the given informations email, name, doornum password.
- * @param {*} objectrepository 
- * @returns 
+ * @param {*} objectrepository
+ * @returns
  */
 module.exports = function (objectrepository) {
       

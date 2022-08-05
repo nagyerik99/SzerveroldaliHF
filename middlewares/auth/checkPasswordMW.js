@@ -1,5 +1,6 @@
 /**
- * Checks if the given password matches with the given eamil-address for user identification.
+ * Checks if the given password or email does not match with the database entity
+ * 
  * @param {} objectrepository 
  * @returns 
  */

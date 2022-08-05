@@ -1,17 +1,18 @@
-var authMW = require('../middlewares/auth/autMW');
-var renderMW = require('../middlewares/auth/renderMW');
+const authMW = require('../middlewares/auth/autMW');
+const renderMW = require('../middlewares/auth/renderMW');
 
-var getUserMW = require('../middlewares/user/getUserMW');
-var getRequestsMW = require('../middlewares/request/getRequestsMW');
-var getRequestMW = require('../middlewares/request/getRequestMW');
-var saveRequestsMW = require('../middlewares/request/saveRequestsMW');
-var delRequestMW = require('../middlewares/request/delRequestMW');
-var getRentedMW = require('../middlewares/rental/getRentedMW');
-var getRentalsMW = require('../middlewares/rental/getRentalsMW');
-var getRentalMW = require('../middlewares/rental/getRentalMW');
-var saveRentalMW = require('../middlewares/rental/saveRentalMW');
-
-
+const getUserMW = require('../middlewares/user/getUserMW');
+const getRequestsMW = require('../middlewares/request/getRequestsMW');
+const getRequestMW = require('../middlewares/request/getRequestMW');
+const saveRequestsMW = require('../middlewares/request/saveRequestsMW');
+const delRequestMW = require('../middlewares/request/delRequestMW');
+const getRentedMW = require('../middlewares/rental/getRentedMW');
+const getRentalsMW = require('../middlewares/rental/getRentalsMW');
+const getRentalMW = require('../middlewares/rental/getRentalMW');
+const saveRentalMW = require('../middlewares/rental/saveRentalMW');
+const inverseAuthMW = require('../middlewares/auth/inverseAuthMW');
+const mainRedirectMW = require('../middlewares/auth/mainRedirectMW');
+const checkRentalDataMW = require('../middlewares/rental/checkRentalDataMW');
 
 module.exports = function (app) {
   var objectRepository = {};
@@ -19,7 +20,7 @@ module.exports = function (app) {
   /**
    * Show all rental request, for the user
    */
-  app.get('/user/:userid/request',
+  app.get('/request',
     authMW(objectRepository),
     getUserMW(objectRepository),
     getRequestsMW(objectRepository),
@@ -27,35 +28,29 @@ module.exports = function (app) {
   );
 
   /**
-   * Accept rental request
+   * Accept rental request get/post if body undefined then get else post
    */
-  app.use('/user/:userid/request/edit/:requestid',
+  app.use('/request/edit/:requestid',
     authMW(objectRepository),
     getUserMW(objectRepository),
     getRequestMW(objectRepository),
-    saveRequestsMW(objectRepository),
-    function (req, res, next) {
-        return res.redirect('/user/:userid/request');
-      }  
+    saveRequestsMW(objectRepository)
   );
 
     /**
    * Decline/Delete rental request
    */
-     app.get('/user/:userid/request/del/:requestid',
+     app.get('/request/del/:requestid',
      authMW(objectRepository),
      getUserMW(objectRepository),
      getRequestMW(objectRepository),
-     delRequestMW(objectRepository),
-     function (req, res, next) {
-        return res.redirect('/user/:userid/request');
-     }  
+     delRequestMW(objectRepository)
    );
 
     /**
    * Show rented items for the user
    */
-     app.get('/user/:userid/rented',
+     app.get('/rented',
      authMW(objectRepository),
      getUserMW(objectRepository),
      getRentedMW(objectRepository),
@@ -63,10 +58,10 @@ module.exports = function (app) {
    );
 
     /**
-   * Show landingpage for the user if not registered or loged in
+   * Show landingpage for the user if not registered or logged in
    */
     app.get('/',
-     authMW(objectRepository),
+     mainRedirectMW(objectRepository),
      renderMW(objectRepository,'index') 
     );
 
@@ -84,11 +79,12 @@ module.exports = function (app) {
     /**
      * Show rentable item details, where the user can send a rental request, for the owner.
      */
-    app.use('/rental/:rentalid',
+    app.use('/rental/rent/:rentalid',
      authMW(objectRepository),
      getUserMW(objectRepository),
      getRentalMW(objectRepository),
-     saveRentalMW(objectRepository),
+     checkRentalDataMW(objectRepository),
+     saveRentalMW(objectRepository),//this will redirect if it was a post rental request.
      renderMW(objectRepository,'rentdetails')
     );
 };
